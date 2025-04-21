@@ -5,8 +5,7 @@ library(HMISprep)
 library(logger)
 
 # Set up logging
-log_threshold(INFO)
-log_info("Starting HMIS data processing job")
+logger::log_info("Starting HMIS data processing job")
 
 # Error handling wrapper
 tryCatch({
@@ -87,10 +86,10 @@ tryCatch({
   # Services
   HMISprep::prep_services()
   gc(verbose = FALSE)
-  
-  log_info("HMIS data processing completed successfully")
+
+  logger::log_info("HMIS data processing completed successfully")
 }, error = function(e) {
-  log_error("Error in HMIS data processing: {e$message}")
+  logger::log_error("Error in HMIS data processing: {e$message}")
   # Optional: send notification about failure
   quit(status = 1)
 })
