@@ -1,0 +1,27 @@
+FROM rocker/r-ver:4.2.0
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    git
+
+# Install required R packages
+RUN R -e "install.packages(c('remotes', 'logger', 'aws.s3'))"
+
+# Install your package (from GitHub or local path)
+# If installing from GitHub:
+RUN R -e "remotes::install_github('COHHIO/HMISprep')"
+# If you have dependencies that aren't on CRAN:
+RUN R -e "remotes::install_github('COHHIO/HMISdata')"
+
+# Copy the processing script
+COPY process_hmis_data.R /app/
+WORKDIR /app
+
+# Make script executable
+RUN chmod +x process_hmis_data.R
+
+# Run the script when container starts
+ENTRYPOINT ["/app/process_hmis_data.R"]
