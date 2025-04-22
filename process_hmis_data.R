@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+ARG GITHUB_PAT
+ENV GITHUB_PAT=${GITHUB_PAT}
+
 # Load necessary libraries
 library(HMISprep)
 library(logger)
