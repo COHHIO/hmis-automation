@@ -2,7 +2,10 @@
 
 # Load necessary libraries
 library(HMISprep)
+library(HMISdata)
 library(logger)
+library(dplyr)
+library(stringr)
 
 # Set up logging
 logger::log_info("Starting HMIS data processing job")
