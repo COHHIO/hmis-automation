@@ -90,6 +90,14 @@ tryCatch({
   HMISprep::prep_services()
   gc(verbose = FALSE)
 
+  # Cohorts
+  HMISprep::prep_cohorts()
+  gc(verbose = FALSE)
+
+  # Program Lookup
+  HMISprep::prep_program_lookup()
+  gc(verbose = FALSE)
+
   logger::log_info("HMIS data processing completed successfully")
 }, error = function(e) {
   logger::log_error("Error in HMIS data processing: {e$message}")
